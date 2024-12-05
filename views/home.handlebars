@@ -1,9 +1,48 @@
-<!-- List of Fungi -->
-        {{#each fungi}}
-            <div class="fungus card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{name}}</h2>
-                    <p class="card-text">{{description}}</p>
-                </div>
-            </div>
-        {{/each}}
+<h1>Tree Fungi Identifier</h1>
+
+<!-- Форма фильтрации -->
+<form class="filter-form" method="GET" action="/">
+    <div>
+        <label for="lifespan">Lifespan:</label>
+        <select name="lifespan" id="lifespan">
+            <option value="">All</option>
+            <option value="annual">Annual</option>
+            <option value="perennial">Perennial</option>
+        </select>
+    </div>
+    <div>
+        <label for="type_of_decay">Type of Decay:</label>
+        <select name="type_of_decay" id="type_of_decay">
+            <option value="">All</option>
+            <option value="root_rot_and_butt_rot">Root Rot and Butt Rot</option>
+            <option value="trunk_rot_and_branch_rot">Trunk Rot and Branch Rot</option>
+        </select>
+    </div>
+    <div>
+        <label for="shape">Shape:</label>
+        <select name="shape" id="shape">
+            <option value="">All</option>
+            <option value="cap_and_stem">Cap and Stem</option>
+            <option value="hoof_shaped">Hoof Shaped</option>
+            <option value="leathery_crust">Leathery Crust</option>
+        </select>
+    </div>
+    <button type="submit">Filter & Sort</button>
+</form>
+
+<!-- Список грибов -->
+<div class="fungi-list">
+    {{#each fungi}}
+        <div class="fungus">
+            <h2>{{latin_name}}</h2>
+            <p><strong>Name:</strong> {{name}}</p>
+            <p><strong>Lifespan:</strong> {{life_span}}</p>
+            <p><strong>Type of Decay:</strong> {{type_of_decay}}</p>
+            <p><strong>Shape:</strong> {{shape}}</p>
+            <p><strong>Description:</strong> {{description}}</p>
+            {{#if image}}
+                <img src="{{image}}" alt="{{name}}">
+            {{/if}}
+        </div>
+    {{/each}}
+</div>

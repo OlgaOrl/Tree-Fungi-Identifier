@@ -1,0 +1,92 @@
+/* Основные стили */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(136, 177, 147); /* Спокойный зелёный фон */
+    color: #101010;
+}
+
+h1 {
+    text-align: center;
+    color: #101010;
+    margin: 20px 0;
+}
+
+/* Стили формы фильтрации */
+.filter-form {
+    background-color: #ffffff;
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 800px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-form div {
+    margin-bottom: 10px;
+}
+
+.filter-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.filter-form select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+
+.filter-form button {
+    background-color: #2e6c43;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.filter-form button:hover {
+    background-color: #218838;
+}
+
+/* Стили списка грибов */
+.fungi-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.fungus {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 300px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fungus h2 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.fungus p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.fungus img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}
