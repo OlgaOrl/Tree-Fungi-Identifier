@@ -12,10 +12,10 @@ model fungus {
   id            Int                   @id @default(autoincrement()) @db.UnsignedInt
   latin_name    String
   name          String
-  life_span     fungus_life_span?
-  type_of_decay fungus_type_of_decay?
-  shape         fungus_shape?
-  description   String?               @db.Text
+  life_span     fungus_life_span
+  type_of_decay fungus_type_of_decay
+  shape         fungus_shape
+  description   String               @db.Text
   image         String?
   fungus_names  fungus_names[]
 }
