@@ -1,9 +1,59 @@
-<!-- List of Fungi -->
-        {{#each fungi}}
-            <div class="fungus card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{name}}</h2>
-                    <p class="card-text">{{description}}</p>
-                </div>
-            </div>
-        {{/each}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tree Fungi Identifier</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Tree Fungi Identifier</h1>
+
+<!-- Форма фильтрации -->
+<form class="filter-form" method="GET" action="/">
+    <div>
+        <label for="life_span">Lifespan:</label>
+        <!-- Используем имя поля "life_span" -->
+        <select name="life_span" id="life_span">
+            <option value="" {{#unless query.life_span}}selected{{/unless}}>All</option>
+            <option value="annual" {{#if (eq query.life_span "annual")}}selected{{/if}}>Annual</option>
+            <option value="perennial" {{#if (eq query.life_span "perennial")}}selected{{/if}}>Perennial</option>
+        </select>
+    </div>
+    <div>
+        <label for="type_of_decay">Type of Decay:</label>
+        <select name="type_of_decay" id="type_of_decay">
+            <option value="" {{#unless query.type_of_decay}}selected{{/unless}}>All</option>
+            <option value="root_rot_and_butt_rot" {{#if (eq query.type_of_decay "root_rot_and_butt_rot")}}selected{{/if}}>Root Rot and Butt Rot</option>
+            <option value="trunk_rot_and_branch_rot" {{#if (eq query.type_of_decay "trunk_rot_and_branch_rot")}}selected{{/if}}>Trunk Rot and Branch Rot</option>
+        </select>
+    </div>
+    <div>
+        <label for="shape">Shape:</label>
+        <select name="shape" id="shape">
+            <option value="" {{#unless query.shape}}selected{{/unless}}>All</option>
+            <option value="cap_and_stem" {{#if (eq query.shape "cap_and_stem")}}selected{{/if}}>Cap and Stem</option>
+            <option value="hoof_shaped" {{#if (eq query.shape "hoof_shaped")}}selected{{/if}}>Hoof Shaped</option>
+            <option value="leathery_crust" {{#if (eq query.shape "leathery_crust")}}selected{{/if}}>Leathery Crust</option>
+        </select>
+    </div>
+    <button type="submit">Filter & Sort</button>
+</form>
+
+<!-- Список грибов -->
+<div class="fungi-list">
+    {{#each fungi}}
+        <div class="fungus">
+            <h2>{{latin_name}}</h2>
+            <p><strong>Name:</strong> {{name}}</p>
+            <p><strong>Lifespan:</strong> {{life_span}}</p>
+            <p><strong>Type of Decay:</strong> {{type_of_decay}}</p>
+            <p><strong>Shape:</strong> {{shape}}</p>
+            <p><strong>Description:</strong> {{description}}</p>
+            {{#if image}}
+                <img src="{{image}}" alt="{{name}}">
+            {{/if}}
+        </div>
+    {{/each}}
+</div>
+</body>
+</html>

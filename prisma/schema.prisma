@@ -1,19 +1,67 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model Fungus {
-  id          Int     @id @default(autoincrement())
-  name        String
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model fungus {
+  id            Int                   @id @default(autoincrement()) @db.UnsignedInt
+  latin_name    String
+  name          String
+  life_span     fungus_life_span
+  type_of_decay fungus_type_of_decay
+  shape         fungus_shape
+  description   String               @db.Text
+  image         String?
+  fungus_names  fungus_names[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model fungus_names {
+  id            Int                        @id @default(autoincrement()) @db.UnsignedInt
+  fungus_id     Int                        @db.UnsignedInt
+  language_code fungus_names_language_code
+  name          String
+  fungus        fungus                     @relation(fields: [fungus_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fungus_names_ibfk_1")
+
+  @@index([fungus_id], map: "fungus_id")
+}
+
+model fungus_tree_genus {
+  id            Int @id @default(autoincrement()) @db.UnsignedInt
+  fungus_id     Int @db.UnsignedInt
+  tree_genus_id Int @db.UnsignedInt
+
+  @@index([tree_genus_id], map: "tree_genus_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tree_genus {
+  id         Int    @id @default(autoincrement()) @db.UnsignedInt
+  genus_name String @unique(map: "genus_name") @db.VarChar(255)
+}
+
+enum fungus_shape {
+  cap_and_stem   @map("cap-and-stem")
+  hoof_shaped    @map("hoof-shaped")
+  leathery_crust @map("leathery crust")
+}
+
+enum fungus_names_language_code {
+  et
+  ru
+}
+
+enum fungus_life_span {
+  annual
+  perennial
+}
+
+enum fungus_type_of_decay {
+  root_rot_and_butt_rot    @map("root rot and butt rot")
+  trunk_rot_and_branch_rot @map("trunk rot and branch rot")
 }
