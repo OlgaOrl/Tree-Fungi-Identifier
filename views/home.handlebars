@@ -36,6 +36,16 @@
             <option value="leathery_crust" {{#if (eq query.shape "leathery_crust")}}selected{{/if}}>Leathery Crust</option>
         </select>
     </div>
+    <!-- Добавляем фильтр по роду деревьев -->
+    <div>
+        <label for="tree_genus_id">Tree Genus:</label>
+        <select name="tree_genus_id" id="tree_genus_id">
+            <option value="" {{#unless query.tree_genus_id}}selected{{/unless}}>All</option>
+            {{#each treeGenera}}
+                <option value="{{id}}" {{#if (eq ../query.tree_genus_id (toString id))}}selected{{/if}}>{{genus_name}}</option>
+            {{/each}}
+        </select>
+    </div>
     <button type="submit">Filter & Sort</button>
 </form>
 
@@ -49,6 +59,13 @@
             <p><strong>Type of Decay:</strong> {{type_of_decay}}</p>
             <p><strong>Shape:</strong> {{shape}}</p>
             <p><strong>Description:</strong> {{description}}</p>
+            {{#if treeGenera.length}}
+                <p><strong>Affects Tree Genera:</strong>
+                    {{#each treeGenera}}
+                        {{genus_name}}{{#unless @last}}, {{/unless}}
+                    {{/each}}
+                </p>
+            {{/if}}
             {{#if image}}
                 <img src="{{image}}" alt="{{name}}">
             {{/if}}
